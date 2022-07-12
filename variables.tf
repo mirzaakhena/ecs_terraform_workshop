@@ -14,3 +14,23 @@ variable "created_by" {
   type    = string
   default = "mirza"
 }
+
+variable "environment" {
+  type    = string
+  default = "dev"
+}
+
+variable "tags" {
+  type = object({
+    environment = string
+    created_by  = string
+  })
+  default = {
+    created_by  = "mirza"
+    environment = "dev"
+  }
+}
+
+
+
+

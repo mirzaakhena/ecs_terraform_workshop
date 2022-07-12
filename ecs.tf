@@ -1,9 +1,6 @@
 resource "aws_ecs_cluster" "web-cluster" {
   name = var.cluster_name
-  tags = {
-    "env"       = "dev"
-    "createdBy" = var.created_by
-  }
+  tags = var.tags
 }
 
 # resource "aws_ecs_cluster_capacity_providers" "cluster-test" {
@@ -34,10 +31,7 @@ resource "aws_ecs_task_definition" "task-definition-test" {
   family                = "web-family"
   container_definitions = file("container-definitions/container-def.json")
   network_mode          = "bridge"
-  tags = {
-    "env"       = "dev"
-    "createdBy" = var.created_by
-  }
+  tags                  = var.tags
 }
 
 resource "aws_ecs_service" "service" {
@@ -64,8 +58,5 @@ resource "aws_ecs_service" "service" {
 
 resource "aws_cloudwatch_log_group" "log_group" {
   name = "/ecs/frontend-container"
-  tags = {
-    "env"       = "dev"
-    "createdBy" = var.created_by
-  }
+  tags = var.tags
 }

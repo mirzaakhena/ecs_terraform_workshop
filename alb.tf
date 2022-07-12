@@ -3,11 +3,8 @@ resource "aws_lb" "test-lb" {
   load_balancer_type = "application"
   internal           = false
   subnets            = module.vpc.public_subnets
-  tags = {
-    "env"       = "dev"
-    "createdBy" = var.created_by
-  }
-  security_groups = [aws_security_group.lb.id]
+  tags               = var.tags
+  security_groups    = [aws_security_group.lb.id]
 }
 
 resource "aws_security_group" "lb" {
@@ -26,14 +23,11 @@ resource "aws_security_group" "lb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    "env"       = "dev"
-    "createdBy" = var.created_by
-  }
+  tags = var.tags
 }
 
 resource "aws_lb_target_group" "lb_target_group" {
-  name        = "masha-target-group"
+  name        = "mirza-target-group"
   port        = "80"
   protocol    = "HTTP"
   target_type = "instance"
