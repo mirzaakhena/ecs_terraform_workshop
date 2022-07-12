@@ -5,7 +5,7 @@ resource "aws_lb" "test-lb" {
   subnets            = module.vpc.public_subnets
   tags = {
     "env"       = "dev"
-    "createdBy" = "mkerimova"
+    "createdBy" = var.created_by
   }
   security_groups = [aws_security_group.lb.id]
 }
@@ -28,7 +28,7 @@ resource "aws_security_group" "lb" {
 
   tags = {
     "env"       = "dev"
-    "createdBy" = "mkerimova"
+    "createdBy" = var.created_by
   }
 }
 
@@ -39,7 +39,7 @@ resource "aws_lb_target_group" "lb_target_group" {
   target_type = "instance"
   vpc_id      = data.aws_vpc.main.id
   health_check {
-    path                = "/"
+    path                = "/ping"
     healthy_threshold   = 2
     unhealthy_threshold = 10
     timeout             = 60

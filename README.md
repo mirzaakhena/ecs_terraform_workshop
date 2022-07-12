@@ -45,3 +45,8 @@ In file `iam.tf` we create roles, which will help us to associate EC2 instances 
 
 In file `alb.tf` we create Application Load Balancer with target groups, security group and listener. 
 
+
+
+aws ecs delete-capacity-provider --capacity-provider arn:aws:ecs:us-west-2:123456789012:capacity-provider/ExampleCapacityProvider
+
+aws ecs describe-capacity-providers
